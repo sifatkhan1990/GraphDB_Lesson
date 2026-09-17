@@ -1,0 +1,5 @@
+person_id,movie_id,role
+P001,M001,Jim Lovell
+P002,M001,Jack Swigert
+P001,M002,Joe Fox
+P003,M002,Kathleen Kelly
