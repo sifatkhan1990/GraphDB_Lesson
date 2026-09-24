@@ -454,6 +454,25 @@ RETURN p
 returns the **paths**, allowing you to inspect the connections used to
 reach the nodes.
 
+### 6 Degrees of Separation
+
+Six degrees of separation is the theory that any person on Earth is connected to any other person by a chain of no more than five intermediaries or six steps.
+Let's see if it applies for **Kevin Bacon**. For a start, in the movie database, since every person connected to another person through a movie, 
+we can define **1 degree (i.e. 1st connection) = 2 hops (i.e. person -> movie <- another person)**. 
+
+Let's see who is farthest connection from Kevin Bacon and how many degrees away this person is from him. Run the following query to find out:
+
+``` cypher
+MATCH p = shortestPath(
+(:Person {name:"Kevin Bacon"})-[*]-(actor:Person)
+)
+WHERE actor.name <> "Kevin Bacon"
+RETURN actor.name AS Actor,
+length(p) AS Hops,
+length(p) / 2 AS Degrees
+ORDER BY Degrees DESC, Actor
+```
+
 ------------------------------------------------------------------------
 
 ## 9. UPDATE --- Change Existing Graph Data
